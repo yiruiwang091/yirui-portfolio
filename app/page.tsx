@@ -7,7 +7,6 @@ import {
   Github,
   ExternalLink,
   GraduationCap,
-  Briefcase,
   Languages,
   Code2,
   Sparkles,
@@ -37,42 +36,44 @@ interface Project {
 
 const t = {
   en: {
-    subtitle: "Math · Data Science · Computational Linguistics",
+    subtitle: "Computational Linguistics · NLP Systems · Data Science",
     contact: "Contact",
     heroTag: "Portfolio",
-    heroTitle: "Mathematics.\nLanguage.\nData.",
+    heroTitle: "Language.\nData.\nSystems.",
     heroDesc:
-      "I'm Yirui — a UBC student building at the intersection of computational linguistics, data science, and mathematics. I care about clear thinking, clean analysis, and meaningful collaboration.",
+      "I'm Yirui — a UBC graduate student in Computational Linguistics. I build data-driven tools for language, search, and analysis, with interests in NLP systems, corpus tools, multilingual language technology, and human-centered AI.",
+    heroNote:
+      "Interested in turning language into something we can search, model, and understand.",
     scrollHint: "Scroll to explore",
     viewProjects: "View Projects",
     experience: "Experience",
     education: "Education",
     focusAreas: "Focus Areas",
     focusTags: [
-      "NLP",
-      "Machine Learning",
+      "Computational Linguistics",
+      "NLP Systems",
+      "Corpus Tools",
+      "Multilingual Language Technology",
       "Statistical Modeling",
-      "Data Analysis",
-      "Teaching",
-      "Collaborative Research",
+      "Human-Centered AI",
     ],
     projectsTag: "Projects",
     projectsTitle: "Selected work",
-    projectsSubtitle: "Course projects, research, and personal explorations.",
+    projectsSubtitle: "Projects that show how I build tools, analyze language data, and communicate technical work.",
     experienceTag: "Experience",
     experienceTitle: "Where I've contributed",
     experienceSubtitle:
       "Teaching, mentoring, and community leadership in academic settings.",
     skillsTag: "Skills",
-    skillsTitle: "What I work with",
+    skillsTitle: "What I can do",
     skillsSubtitle:
-      "Technical tools and strengths from coursework and projects.",
-    langLabel: "Languages",
-    dataLabel: "Data & NLP",
-    strengthsLabel: "Strengths",
+      "Technical tools, NLP workflows, and practical strengths developed through coursework and projects.",
+    langLabel: "Languages & Frameworks",
+    dataLabel: "NLP & Data Work",
+    strengthsLabel: "Capabilities",
     connectTitle: "Let's connect",
     connectDesc:
-      "Interested in data analysis, NLP, computational linguistics, or education-focused technical work? I'd love to hear from you.",
+      "Interested in NLP systems, computational linguistics, corpus tools, or data-driven analysis? I’d love to connect.",
     email: "Email",
     liveDemo: "Live Demo",
     viewRepo: "Repository",
@@ -90,11 +91,11 @@ const t = {
     ],
     projects: [
       {
-        title: "COLX 523 Team Project",
-        period: "UBC · 2026",
+        title: "Amazon Review Corpus Search Engine",
+        period: "COLX 523 · UBC · 2026",
         description:
-          "A collaborative computational linguistics project focused on data processing, analysis, modeling, and team-based development workflows.",
-        stack: ["Python", "Git", "NLP", "Data Analysis", "Team Workflow"],
+          "Built a corpus exploration tool for Amazon Sports & Outdoors reviews, combining full-text retrieval, annotation browsing, and sentiment-aware filtering. This project highlights my ability to structure text data for search, design NLP-backed interfaces, and turn large review corpora into usable research tools.",
+        stack: ["Python", "FastAPI", "Whoosh", "NLP", "Docker", "Corpus Tools"],
         repo: "https://github.com/yiruiwang091/COLX_523_Projects",
         cta: "Repository",
         demo: "https://colx-523-projects.onrender.com",
@@ -104,17 +105,17 @@ const t = {
         title: "Mathematical Modeling",
         period: "MATH 360 · UBC",
         description:
-          "Deterministic, stochastic, and data-driven models applied across biology, earth science, chemistry, and physics.",
+          "Developed deterministic, stochastic, and data-driven models for problems in biology, earth science, chemistry, and physics. This work strengthened my skills in quantitative reasoning, model interpretation, and translating real-world questions into analyzable mathematical forms.",
         stack: ["Modeling", "Python", "Regression", "Scientific Computing"],
         repo: "https://github.com/yiruiwang091/MATH-Projects",
         cta: "Repository",
       },
       {
-        title: "Personal Projects",
-        period: "Ongoing",
+        title: "Expense Tracker",
+        period: "CPSC 210 · UBC",
         description:
-          "A growing collection of independent work spanning software construction, data analysis, and experimentation.",
-        stack: ["Python", "Java", "R", "SQL"],
+          "Built a personal finance application in Java with support for expense tracking, category management, and persistent storage. The project reflects my experience with object-oriented design, GUI development, and translating everyday user needs into functional software.",
+        stack: ["Java", "OOP", "JSON", "GUI"],
         repo: "https://github.com/yiruiwang091/Projects",
         cta: "Repository",
       },
@@ -146,97 +147,106 @@ const t = {
       },
     ],
     skills: {
-      languages: ["Python", "R", "Java", "SQL", "Racket"],
-      data: ["pandas", "NumPy", "matplotlib", "scikit-learn", "NLTK"],
-      strengths: [
-        "Data analysis",
+      languages: ["Python", "R", "Java", "SQL", "FastAPI", "Docker"],
+      data: [
+        "Corpus search",
+        "Text classification",
+        "Sentiment analysis",
         "Statistical modeling",
-        "Natural language processing",
-        "Machine learning workflows",
-        "Technical communication",
-        "Collaborative development",
+        "Experimental evaluation",
+        "Data visualization",
+      ],
+      strengths: [
+        "Build language data tools",
+        "Design research prototypes",
+        "Analyze multilingual text data",
+        "Translate ideas into clear interfaces",
+        "Write and present technical work",
+        "Collaborate across teams",
       ],
     },
   },
   zh: {
-    subtitle: "数学 · 数据科学 · 计算语言学",
+    subtitle: "计算语言学 · NLP 系统 · 数据科学",
     contact: "联系我",
-    heroTag: "个人作品集",
-    heroTitle: "数学。\n语言。\n数据。",
+    heroTag: "作品集",
+    heroTitle: "语言。\n数据。\n系统。",
     heroDesc:
-      "我是王逸睿，UBC 学生，专注于计算语言学、数据科学与数学的交叉领域。我重视清晰的思维、严谨的分析和有意义的协作。",
-    scrollHint: "向下滚动探索",
-    viewProjects: "查看项目",
+      "我叫王一锐，在 UBC 攻读计算语言学方向的数据科学硕士。我关注如何把语言问题变成可分析、可建模、可交互的系统，尤其对 NLP、语料库工具、多语言语言技术和数据驱动分析感兴趣。",
+    heroNote:
+      "我喜欢把语言问题变成可以检索、建模和理解的东西。",
+    scrollHint: "下滑了解更多",
+    viewProjects: "看看项目",
     experience: "经历",
-    education: "教育背景",
-    focusAreas: "研究方向",
+    education: "教育",
+    focusAreas: "方向",
     focusTags: [
-      "自然语言处理",
-      "机器学习",
+      "计算语言学",
+      "NLP 系统",
+      "语料工具",
+      "多语言语言技术",
       "统计建模",
-      "数据分析",
-      "教学",
-      "协作研究",
+      "以人为中心的 AI",
     ],
     projectsTag: "项目",
-    projectsTitle: "精选作品",
-    projectsSubtitle: "课程项目、研究成果和个人探索。",
+    projectsTitle: "做过的事",
+    projectsSubtitle: "能体现我如何处理语言数据、搭建工具并清晰表达结果的项目。",
     experienceTag: "经历",
-    experienceTitle: "我的贡献",
-    experienceSubtitle: "横跨多个学术场景的教学、指导与社区领导经验。",
+    experienceTitle: "待过的地方",
+    experienceSubtitle: "教过课、带过人、也在学术社区里做过一些事。",
     skillsTag: "技能",
-    skillsTitle: "技术栈",
-    skillsSubtitle: "从课程和项目中积累的工具与核心能力。",
-    langLabel: "编程语言",
-    dataLabel: "数据与 NLP",
-    strengthsLabel: "核心优势",
-    connectTitle: "联系我",
+    skillsTitle: "我能做什么",
+    skillsSubtitle: "课程和项目中积累下来的技术工具、NLP 工作流与实际能力。",
+    langLabel: "语言与框架",
+    dataLabel: "NLP 与数据工作",
+    strengthsLabel: "能力",
+    connectTitle: "期待与您联系",
     connectDesc:
-      "如果您对数据分析、自然语言处理、计算语言学或教育方向的技术工作感兴趣，期待与您交流。",
-    email: "邮件",
-    liveDemo: "在线演示",
-    viewRepo: "代码仓库",
+      "如果您在寻找 NLP、计算语言学或数据科学方向的人才，欢迎通过邮件或 GitHub 与我取得联系。",
+    email: "邮件联系",
+    liveDemo: "在线体验",
+    viewRepo: "看代码",
     edu: [
       {
         school: "英属哥伦比亚大学 (UBC)",
-        degree: "数学理学学士",
+        degree: "数学 学士",
         year: "2021 – 2025",
       },
       {
         school: "英属哥伦比亚大学 (UBC)",
-        degree: "数据科学硕士 · 计算语言学方向",
-        year: "2025 – 2026（预计）",
+        degree: "数据科学 硕士 · 计算语言学方向",
+        year: "2025 – 2026（在读）",
       },
     ],
     projects: [
       {
-        title: "COLX 523 团队项目",
-        period: "UBC · 2026",
+        title: "亚马逊评论语料库检索系统",
+        period: "COLX 523 · UBC · 2026",
         description:
-          "以数据处理、分析、建模和团队协作为核心的计算语言学合作项目。",
-        stack: ["Python", "Git", "NLP", "数据分析", "团队协作"],
+          "构建了一个面向亚马逊户外用品评论的语料探索工具，支持全文检索、标注浏览和情感过滤。这个项目体现了我把文本数据组织成可搜索资源、设计 NLP 支撑的交互界面、并将大规模评论语料转化为可用研究工具的能力。",
+        stack: ["Python", "FastAPI", "Whoosh", "NLP", "Docker", "语料工具"],
         repo: "https://github.com/yiruiwang091/COLX_523_Projects",
-        cta: "代码仓库",
+        cta: "看代码",
         demo: "https://colx-523-projects.onrender.com",
-        demoCta: "在线演示",
+        demoCta: "在线体验",
       },
       {
-        title: "数学建模项目",
+        title: "数学建模",
         period: "MATH 360 · UBC",
         description:
-          "涵盖生物、地球科学、化学和物理的数学建模，聚焦确定性、随机性和数据驱动方法。",
+          "针对生物、地学、化学和物理中的实际问题，建立了确定性、随机和数据驱动模型。这些项目训练了我把现实问题抽象成可分析数学形式、解释模型结果并进行定量推理的能力。",
         stack: ["建模", "Python", "回归分析", "科学计算"],
         repo: "https://github.com/yiruiwang091/MATH-Projects",
-        cta: "代码仓库",
+        cta: "看代码",
       },
       {
-        title: "个人编程项目",
-        period: "持续更新",
+        title: "记账软件",
+        period: "CPSC 210 · UBC",
         description:
-          "涵盖软件构建、数据分析和技术探索的个人项目合集。",
-        stack: ["Python", "Java", "R", "SQL"],
+          "用 Java 开发了一个个人记账应用，支持收支记录、分类管理和数据持久化。这个项目体现了我在面向对象设计、GUI 开发，以及把日常使用需求转化为可用软件方面的实践能力。",
+        stack: ["Java", "OOP", "JSON", "GUI"],
         repo: "https://github.com/yiruiwang091/Projects",
-        cta: "代码仓库",
+        cta: "看代码",
       },
     ] as Project[],
     experiences: [
@@ -244,37 +254,44 @@ const t = {
         role: "学生代表",
         org: "UBC MDS-CL",
         detail:
-          "作为学生与教学团队之间的桥梁，收集反馈并组织社区活动。",
+          "帮同学们收集意见反馈给老师，也组织了不少班级活动。",
       },
       {
-        role: "数学教学志愿者",
+        role: "数学志愿教师",
         org: "Norma Rose Point 小学",
         detail:
-          "设计挑战性题目，帮助学生理解概念并清晰表达数学思路。",
+          "给小学生出有挑战性的数学题，带他们理解概念、学会把想法说清楚。",
       },
       {
-        role: "中文语言助教",
+        role: "中文助教",
         org: "UBC 亚洲研究系",
         detail:
-          "通过引导练习、即时反馈和课堂互动为中文学习者提供支持。",
+          "在课堂上带学生练中文，做口语引导和即时纠正。",
       },
       {
-        role: "英语教师",
+        role: "英语老师",
         org: "Qkids",
         detail:
-          "开展互动式在线课程，针对不同年龄和水平灵活调整教学方式。",
+          "线上教英语，根据学生年龄和水平调整内容和节奏。",
       },
     ],
     skills: {
-      languages: ["Python", "R", "Java", "SQL", "Racket"],
-      data: ["pandas", "NumPy", "matplotlib", "scikit-learn", "NLTK"],
-      strengths: [
-        "数据分析",
+      languages: ["Python", "R", "Java", "SQL", "FastAPI", "Docker"],
+      data: [
+        "语料检索",
+        "文本分类",
+        "情感分析",
         "统计建模",
-        "自然语言处理",
-        "机器学习流程",
-        "技术写作",
-        "协作开发",
+        "实验评估",
+        "数据可视化",
+      ],
+      strengths: [
+        "搭建语言数据工具",
+        "设计研究原型",
+        "分析多语言文本数据",
+        "把技术想法做成清晰界面",
+        "技术写作与展示",
+        "跨团队协作开发",
       ],
     },
   },
@@ -320,7 +337,7 @@ function SectionTag({ children }: { children: React.ReactNode }) {
 // ─── main page ───────────────────────────────────────────────────────────────
 
 export default function PortfolioSite() {
-  const [lang, setLang] = useState<Lang>("en");
+  const [lang, setLang] = useState<Lang>("zh");
   const c = t[lang];
   const toggleLang = () => setLang((p) => (p === "en" ? "zh" : "en"));
 
@@ -371,14 +388,20 @@ export default function PortfolioSite() {
         ref={heroRef}
         className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6"
       >
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)",
-            backgroundSize: "80px 80px",
-          }}
-        />
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div
+            className="absolute -top-[20%] -left-[10%] h-[600px] w-[600px] rounded-full opacity-[0.15] blur-[120px]"
+            style={{ background: "radial-gradient(circle, #6366f1, transparent 70%)" }}
+          />
+          <div
+            className="absolute top-[10%] right-[-5%] h-[500px] w-[500px] rounded-full opacity-[0.12] blur-[100px]"
+            style={{ background: "radial-gradient(circle, #06b6d4, transparent 70%)" }}
+          />
+          <div
+            className="absolute bottom-[-10%] left-[30%] h-[400px] w-[400px] rounded-full opacity-[0.10] blur-[100px]"
+            style={{ background: "radial-gradient(circle, #f59e0b, transparent 70%)" }}
+          />
+        </div>
 
         <motion.div
           style={{ y: heroY, opacity: heroOpacity }}
@@ -392,10 +415,19 @@ export default function PortfolioSite() {
             <SectionTag>{c.heroTag}</SectionTag>
           </motion.div>
 
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.45 }}
+            className="mt-6 text-sm font-medium uppercase tracking-[0.22em] text-slate-400"
+          >
+            {c.subtitle}
+          </motion.p>
+
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            transition={{ duration: 0.8, delay: 0.55 }}
             className="mt-6 whitespace-pre-line text-6xl font-bold leading-[1.05] tracking-tight sm:text-8xl lg:text-9xl"
           >
             {c.heroTitle}
@@ -404,10 +436,19 @@ export default function PortfolioSite() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
+            transition={{ duration: 0.8, delay: 0.75 }}
             className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-slate-500 sm:text-xl"
           >
             {c.heroDesc}
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+            className="mx-auto mt-5 max-w-2xl text-sm italic tracking-wide text-slate-400 sm:text-base"
+          >
+            {c.heroNote}
           </motion.p>
 
           <motion.div
@@ -439,16 +480,13 @@ export default function PortfolioSite() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-10 flex flex-col items-center gap-2 text-slate-400"
+          className="absolute bottom-4 flex flex-col items-center gap-1 text-slate-300"
         >
-          <span className="text-xs uppercase tracking-widest">
-            {c.scrollHint}
-          </span>
           <motion.div
-            animate={{ y: [0, 8, 0] }}
+            animate={{ y: [0, 6, 0] }}
             transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
           >
-            <ArrowDown className="h-4 w-4" />
+            <ArrowDown className="h-3.5 w-3.5" />
           </motion.div>
         </motion.div>
       </section>
