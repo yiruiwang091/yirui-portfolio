@@ -116,7 +116,7 @@ const t = {
         description:
           "Built a personal finance application in Java with support for expense tracking, category management, and persistent storage. The project reflects my experience with object-oriented design, GUI development, and translating everyday user needs into functional software.",
         stack: ["Java", "OOP", "JSON", "GUI"],
-        repo: "https://github.com/yiruiwang091/Projects",
+        repo: "https://github.com/yiruiwang091/Accounting_javafx.git",
         cta: "Repository",
       },
     ] as Project[],
@@ -245,7 +245,7 @@ const t = {
         description:
           "用 Java 开发了一个个人记账应用，支持收支记录、分类管理和数据持久化。这个项目体现了我在面向对象设计、GUI 开发，以及把日常使用需求转化为可用软件方面的实践能力。",
         stack: ["Java", "OOP", "JSON", "GUI"],
-        repo: "https://github.com/yiruiwang091/Projects",
+        repo: "https://github.com/yiruiwang091/Accounting_javafx.git",
         cta: "看代码",
       },
     ] as Project[],
