@@ -765,6 +765,16 @@ export default function PortfolioSite() {
           </div>
         </Reveal>
       </section>
+            <footer className="border-t border-slate-200 bg-white px-6 py-6 text-center text-sm text-slate-500">
+        <a
+          href="https://beian.miit.gov.cn/"
+          target="_blank"
+          rel="noreferrer"
+          className="transition hover:text-slate-900"
+        >
+          鲁ICP备2026016044号
+        </a>
+      </footer>
     </div>
   );
 }
