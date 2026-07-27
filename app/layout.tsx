@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Yirui Wang — Applied AI, AI Product & Data Science",
-  description: "Portfolio of Yirui Wang, a UBC MDS-CL graduate focused on applied AI, RAG, NLP systems, data products, and user-centered evaluation.",
+  description: "Portfolio of Yirui Wang, a UBC MDS-CL student expected to graduate in November 2026, focused on applied AI, RAG, NLP systems, data products, and user-centered evaluation.",
 };
 
 export default function RootLayout({

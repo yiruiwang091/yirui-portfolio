@@ -80,7 +80,7 @@ const t = {
     ],
     poemAccent: "With language, data, and product sense.",
     name: "Yirui Wang",
-    credentials: "UBC MDS-CL Graduate · B.Sc. Mathematics",
+    credentials: "UBC MDS-CL · Expected Nov 2026 · B.Sc. Mathematics",
     subtitle: "Applied AI · AI Product · Data Science",
     contact: "Contact",
     viewProjects: "View Projects",
@@ -129,7 +129,7 @@ const t = {
       {
         school: "University of British Columbia",
         degree: "Master of Data Science — Computational Linguistics",
-        year: "2025 – 2026 · Completed",
+        year: "Sep 2025 – Nov 2026 · Expected",
       },
     ],
     projects: [
@@ -267,7 +267,7 @@ const t = {
     ],
     poemAccent: "用语言、数据和产品判断。",
     name: "王一锐",
-    credentials: "UBC 计算语言学数据科学硕士 · 已完成",
+    credentials: "UBC 计算语言学数据科学硕士 · 预计 2026.11 毕业",
     subtitle: "应用 AI · AI 产品 · 数据科学",
     contact: "联系我",
     viewProjects: "看看项目",
@@ -312,7 +312,7 @@ const t = {
       {
         school: "英属哥伦比亚大学 (UBC)",
         degree: "数据科学 硕士 · 计算语言学方向",
-        year: "2025 – 2026 · 已完成",
+        year: "2025.09 – 2026.11 · 预计毕业",
       },
     ],
     projects: [
