@@ -1,14 +1,13 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import dynamic from "next/dynamic";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import {
   Mail,
   Github,
   ExternalLink,
   GraduationCap,
-  Languages,
   Code2,
   Sparkles,
   Globe,
@@ -43,6 +42,11 @@ interface Project {
   demoCta?: string;
 }
 
+interface SkillGroup {
+  label: string;
+  items: string[];
+}
+
 // ─── design tokens ────────────────────────────────────────────────────────────
 
 const C = {
@@ -67,17 +71,17 @@ const C = {
 
 const t = {
   en: {
-    tag: "Portfolio · 作品集",
+    tag: "Applied AI · Data Science · NLP",
     // The "thoughtful" opening lines — shown large on the left
     poem: [
-      "Between every word",
-      "is a structure",
-      "waiting to be found.",
+      "Building AI systems",
+      "that connect knowledge",
+      "to real user needs.",
     ],
-    poemAccent: "I find it.",
+    poemAccent: "With language, data, and product sense.",
     name: "Yirui Wang",
-    credentials: "MDS-CL · UBC · Class of 2026",
-    subtitle: "Computational Linguistics · NLP · Data Science",
+    credentials: "UBC MDS-CL Graduate · B.Sc. Mathematics",
+    subtitle: "Applied AI · AI Product · Data Science",
     contact: "Contact",
     viewProjects: "View Projects",
     navLinks: [
@@ -92,78 +96,79 @@ const t = {
       "NLP Systems",
       "Corpus Tools",
       "Multilingual Language Technology",
-      "Statistical Modeling",
-      "Human-Centered AI",
+      "Multimodal AI",
+      "Data Products",
+      "Human-Centered AI Systems",
     ],
     projectsTag: "Projects",
     projectsTitle: "Selected work",
     projectsSubtitle:
-      "Projects that show how I build tools, analyze language data, and communicate technical work.",
+      "I build applied AI and data products across RAG, NLP, multimodal interfaces, and analytics, with a focus on systems that make information easier to use.",
     experienceTag: "Experience",
     experienceTitle: "Where I've contributed",
     experienceSubtitle:
-      "Teaching, mentoring, and community leadership in academic settings.",
+      "Applied AI, data analysis, teaching, and program leadership across healthcare, finance, and education settings.",
     skillsTag: "Skills",
-    skillsTitle: "What I can do",
+    skillsTitle: "Core toolkit",
     skillsSubtitle:
-      "Technical tools, NLP workflows, and practical strengths developed through coursework and projects.",
+      "A focused set of tools and workflows supported by completed projects, internships, and coursework.",
     langLabel: "Languages & Frameworks",
     dataLabel: "NLP & Data Work",
     strengthsLabel: "Capabilities",
     connectTitle: "Let's connect",
     connectDesc:
-      "Interested in NLP systems, computational linguistics, corpus tools, or data-driven analysis? I'd love to connect.",
+      "Interested in applied AI, AI product work, NLP systems, RAG applications, or data-driven user research? I'd be glad to connect.",
     email: "Email me",
     liveDemo: "Live Demo",
     edu: [
       {
         school: "University of British Columbia",
         degree: "B.Sc. in Mathematics",
-        year: "2021 – 2025",
+        year: "2021 – 2025 · Completed",
       },
       {
         school: "University of British Columbia",
         degree: "Master of Data Science — Computational Linguistics",
-        year: "2025 – 2026 (Expected)",
+        year: "2025 – 2026 · Completed",
       },
     ],
     projects: [
       {
-        title: "Cancer Navigation Chatbot — Voice & SMS",
-        period: "MDS Capstone · UBC Psychiatry Lab · 2026",
-        tldr: "Extended a RAG cancer chatbot with real-time voice (STT/TTS) and SMS modalities for BC patients who can't use text interfaces.",
+        title: "Multi-channel Cancer Support Chatbot",
+        period: "UBC Psychiatry Lab · MDS Capstone · Apr-Jun 2026",
+        tldr: "Completed a healthcare RAG assistant extension that made cancer support information reachable through SMS, voice, email, and REST API channels.",
         description:
-          "Collaborated with UBC Psychiatry Lab to make an existing RAG-based cancer navigation chatbot accessible beyond typing. Integrated AWS Transcribe Medical for real-time speech recognition, implemented interruption handling and human-agent handoff for voice calls, and contributed to SMS prompt engineering and multi-turn context management. Evaluated against 200+ clinician-validated Q&A pairs.",
+          "Built a Python/FastAPI backend around AWS Bedrock and RAG, connecting Lambda, ECS, ALB, SES, S3, and DynamoDB with conversation history and prompt pipelines. The project added SMS compression that preserved resource links, voice streaming with Transcribe and Polly, interruption handling, email thread memory, empathy detection, QA evaluation, stakeholder demos, and architecture/API documentation for patient and caregiver access.",
         highlights: [
-          { icon: "🎙️", label: "Real-time voice STT/TTS" },
-          { icon: "💬", label: "SMS + voice dual-modal" },
-          { icon: "🏥", label: "200+ validated Q&A pairs" },
+          { icon: "🎙️", label: "SMS, voice, email" },
+          { icon: "🏥", label: "200+ clinical QA cases" },
+          { icon: "🏆", label: "Best Cohort Prize" },
         ],
         concepts: [
           { term: "RAG", def: "Retrieval-Augmented Generation — retrieves relevant docs then generates grounded answers" },
-          { term: "STT / TTS", def: "Speech-to/from-Text — medical variant tuned for clinical terminology accuracy" },
-          { term: "AWS Bedrock", def: "Managed AWS service for running foundation LLMs in a secure cloud environment" },
+          { term: "Multi-channel AI", def: "One assistant experience adapted for SMS, voice, email, and API access" },
+          { term: "Conversation memory", def: "Thread history and follow-up state used to keep support interactions coherent" },
         ],
-        stack: ["Python", "AWS Bedrock", "RAG", "Amazon Transcribe", "Amazon Polly", "LLM"],
+        stack: ["Python", "FastAPI", "AWS Bedrock", "RAG", "Lambda", "ECS", "ALB", "SES", "S3", "DynamoDB", "Transcribe", "Polly"],
         slug: "psychiatry-chatbot",
       },
       {
-        title: "Amazon Review Corpus Search Engine",
-        period: "COLX 523 · UBC · 2026",
-        tldr: "Full-text search engine over 50k+ Amazon reviews with NLP annotation & sentiment filtering.",
+        title: "Amazon Review Search & Analysis Platform",
+        period: "UBC COLX 523 · Feb-Apr 2026",
+        tldr: "Search and analysis platform for Amazon reviews with keyword retrieval, sentiment filtering, facets, and a deployed demo.",
         description:
-          "Built a corpus exploration tool for Amazon Sports & Outdoors reviews, combining full-text retrieval, annotation browsing, and sentiment-aware filtering. Highlights my ability to structure text data for search, design NLP-backed interfaces, and turn large review corpora into usable research tools.",
+          "Converted unstructured product reviews into a searchable feedback dataset. I worked on ETL, text cleaning, attribute faceting, FastAPI REST endpoints, relevance ranking, pagination, deployment checks, and an interface that helps users explore product feedback by keyword, attribute, and sentiment.",
         highlights: [
           { icon: "📄", label: "50k+ reviews indexed" },
-          { icon: "🔍", label: "3 search modes" },
-          { icon: "🏷️", label: "Sentiment-aware filtering" },
+          { icon: "🔍", label: "Keyword + faceted search" },
+          { icon: "🚀", label: "Live demo deployed" },
         ],
         concepts: [
           { term: "Corpus", def: "A structured collection of text for linguistic or NLP analysis" },
-          { term: "Whoosh", def: "Pure-Python full-text search & indexing library" },
+          { term: "Facets", def: "Structured filters that let users narrow search results by attributes" },
           { term: "FastAPI", def: "High-performance async Python web framework" },
         ],
-        stack: ["Python", "FastAPI", "Whoosh", "NLP", "Docker", "Corpus Tools"],
+        stack: ["Python", "FastAPI", "NLTK", "ETL", "HTML/CSS", "JavaScript", "Docker"],
         repo: "https://github.com/yiruiwang091/COLX_523_Projects",
         cta: "Repository",
         slug: "corpus-search",
@@ -171,36 +176,36 @@ const t = {
         demoCta: "Live Demo",
       },
       {
-        title: "Mathematical Modeling",
-        period: "MATH 360 · UBC",
-        tldr: "Deterministic, stochastic & data-driven models spanning biology, earth science, chemistry and physics.",
+        title: "Multimodal Membership Inference Risk Analysis",
+        period: "UBC COLX 585 · Mar-Apr 2026",
+        tldr: "Model evaluation pipeline measuring membership-inference risk in multimodal model outputs.",
         description:
-          "Developed deterministic, stochastic, and data-driven models for problems in biology, earth science, chemistry, and physics. Strengthened skills in quantitative reasoning, model interpretation, and translating real-world questions into analyzable mathematical forms.",
+          "Built a reproducible PyTorch and Hugging Face evaluation workflow for AI safety analysis. The pipeline extracted token loss, likelihood-ratio, and rank-based signals, compared detection methods, and evaluated privacy risk using AUC and TPR@FPR=0.1.",
         highlights: [
-          { icon: "📐", label: "4 scientific domains" },
-          { icon: "🎲", label: "Stochastic + ODE models" },
-          { icon: "📊", label: "Real-world datasets" },
+          { icon: "📈", label: "0.84 validation AUC" },
+          { icon: "🧪", label: "AUC + TPR@FPR" },
+          { icon: "🔁", label: "Reproducible workflow" },
         ],
         concepts: [
-          { term: "Stochastic", def: "Models that incorporate randomness to simulate uncertainty" },
-          { term: "ODE", def: "Ordinary Differential Equation — describes how a system evolves over time" },
-          { term: "Regression", def: "Statistical technique to quantify relationships between variables" },
+          { term: "Membership inference", def: "Tests whether a model output reveals if data was part of training" },
+          { term: "ROC-AUC", def: "Evaluation metric for ranking positive examples above negative examples" },
+          { term: "Likelihood ratio", def: "Signal comparing how likely an output is under different assumptions" },
         ],
-        stack: ["Modeling", "Python", "Regression", "Scientific Computing"],
-        repo: "https://github.com/yiruiwang091/MATH-Projects",
+        stack: ["Python", "PyTorch", "HuggingFace", "Model Evaluation", "AUC", "AI Safety"],
+        repo: "https://github.com/yiruiwang091/membership_attack",
         cta: "Repository",
-        slug: "math-modeling",
+        slug: "membership-inference",
       },
       {
-        title: "Expense Tracker",
-        period: "CPSC 210 · UBC",
-        tldr: "JavaFX desktop finance app with MVC architecture, category management, and JSON persistence.",
+        title: "Personal Finance Desktop Application",
+        period: "Personal Project · Apr 2026",
+        tldr: "JavaFX desktop app for multi-currency expense tracking, category analytics, budget alerts, and JSON persistence.",
         description:
-          "Built a personal finance application in Java with support for expense tracking, category management, and persistent storage. Reflects experience with object-oriented design, GUI development, and translating everyday user needs into functional software.",
+          "Implemented a local finance tool with MVC architecture, object-oriented design, event-driven UI workflows, category-level spending reports, multi-currency entry, exchange-rate normalization, monthly budget tracking, and persistent JSON storage.",
         highlights: [
           { icon: "🏗️", label: "MVC architecture" },
+          { icon: "💱", label: "Multi-currency flow" },
           { icon: "💾", label: "JSON persistence" },
-          { icon: "🖥️", label: "JavaFX GUI" },
         ],
         concepts: [
           { term: "OOP", def: "Object-Oriented Programming — design software around reusable class hierarchies" },
@@ -215,67 +220,55 @@ const t = {
     ] as Project[],
     experiences: [
       {
-        role: "Math & Science Tutor",
-        org: "Haidao Education · China (Online)",
-        period: "Apr 2026 – Present",
-        detail: "1-on-1 and small-group math/science tutoring for university students, adapting pace to individual needs.",
+        role: "Medical AI Software Developer",
+        org: "UBC Psychiatry Lab",
+        period: "Apr-Jun 2026",
+        detail: "Built backend and AI workflow components for a multi-channel cancer support chatbot using AWS, RAG, and FastAPI.",
       },
       {
-        role: "Student Representative",
-        org: "UBC MDS-CL",
-        period: "",
-        detail: "Bridge between students and faculty — collected feedback and organized cohort activities.",
+        role: "Data Analyst Intern",
+        org: "Jinyuan Securities",
+        period: "Jun-Aug 2025",
+        detail: "Used SQL and Python to clean customer transaction, holdings, and product-purchase data for profiling and reporting.",
       },
       {
-        role: "Math Teacher Volunteer",
-        org: "Norma Rose Point Elementary",
-        period: "",
-        detail: "Designed challenge problems and helped elementary students articulate mathematical reasoning.",
+        role: "Data Analytics Intern",
+        org: "Yantai Lantian Investment Holdings",
+        period: "May-Jul 2024",
+        detail: "Automated ETL, data-quality checks, batch updates, statistical analysis, and Tableau/Matplotlib dashboards.",
       },
       {
-        role: "Mandarin Language Assistant",
-        org: "UBC Asian Studies",
-        period: "",
-        detail: "Led guided speaking practice and provided real-time feedback for Mandarin learners.",
+        role: "Lobby Manager Intern",
+        org: "Yantai Rural Commercial Bank",
+        period: "Jul-Sep 2024",
+        detail: "Supported branch service workflows and organized high-frequency consultation and transaction records.",
       },
       {
-        role: "English Teacher",
-        org: "Qkids · China (Online)",
-        period: "",
-        detail: "Taught interactive online English lessons tailored to different ages and proficiency levels.",
+        role: "Teaching & Student Leadership",
+        org: "UBC MDS-CL · Haidao · UBC Asian Studies",
+        period: "2022-2026",
+        detail: "Served as MDS-CL student representative and taught or assisted math, science, English, and Mandarin learners.",
       },
     ],
-    skills: {
-      languages: ["Python", "R", "Java", "SQL", "FastAPI", "Docker"],
-      data: [
-        "Corpus search",
-        "Text classification",
-        "Sentiment analysis",
-        "Statistical modeling",
-        "Experimental evaluation",
-        "Data visualization",
-      ],
-      strengths: [
-        "Build language data tools",
-        "Design research prototypes",
-        "Analyze multilingual text data",
-        "Translate ideas into clear interfaces",
-        "Write and present technical work",
-        "Collaborate across teams",
-      ],
-    },
+    skills: [
+      { label: "AI & NLP", items: ["LLMs", "RAG", "Prompt Engineering", "NLP pipelines", "HuggingFace", "PyTorch", "Empathy detection", "Model evaluation"] },
+      { label: "Data & Machine Learning", items: ["Python", "pandas", "NumPy", "SQL", "ETL", "Statistical modeling", "Time-series analysis", "AUC/TPR evaluation", "Tableau", "Matplotlib"] },
+      { label: "Cloud & Backend", items: ["FastAPI", "REST APIs", "AWS Bedrock", "Lambda", "ECS", "ALB", "SES", "S3", "DynamoDB", "Transcribe", "Polly"] },
+      { label: "Product, Research & Evaluation", items: ["User flows", "Stakeholder demos", "Clinical QA evaluation", "Technical documentation", "Customer segmentation", "Data ethics"] },
+      { label: "Programming & Tools", items: ["Python", "Java", "R", "SQL", "JavaScript", "HTML/CSS", "Git/GitHub", "Jupyter", "R Markdown", "Excel"] },
+    ] as SkillGroup[],
   },
   zh: {
-    tag: "Portfolio · 作品集",
+    tag: "应用 AI · 数据科学 · NLP",
     poem: [
-      "每个词语之间",
-      "都藏着一种",
-      "等待被发现的结构。",
+      "把 AI 系统",
+      "接到真实知识",
+      "和真实用户需求上。",
     ],
-    poemAccent: "我去找它。",
+    poemAccent: "用语言、数据和产品判断。",
     name: "王一锐",
-    credentials: "计算语言学硕士 · UBC · 2026 在读",
-    subtitle: "计算语言学 · NLP 系统 · 数据科学",
+    credentials: "UBC 计算语言学数据科学硕士 · 已完成",
+    subtitle: "应用 AI · AI 产品 · 数据科学",
     contact: "联系我",
     viewProjects: "看看项目",
     navLinks: [
@@ -289,76 +282,76 @@ const t = {
       "计算语言学",
       "NLP 系统",
       "语料工具",
-      "多语言语言技术",
-      "统计建模",
-      "以人为中心的 AI",
+      "多模态 AI",
+      "数据产品",
+      "以用户为中心的 AI 系统",
     ],
     projectsTag: "项目",
     projectsTitle: "做过的事",
-    projectsSubtitle: "能体现我如何处理语言数据、搭建工具并清晰表达结果的项目。",
+    projectsSubtitle: "我关注 RAG、NLP、多模态交互与数据分析，并把技术能力落到可使用、可评估的 AI 与数据产品中。",
     experienceTag: "经历",
     experienceTitle: "待过的地方",
-    experienceSubtitle: "教过课、带过人、也在学术社区里做过一些事。",
+    experienceSubtitle: "医疗 AI、数据分析、教学和项目沟通中的实践经历。",
     skillsTag: "技能",
-    skillsTitle: "我能做什么",
-    skillsSubtitle: "课程和项目中积累下来的技术工具、NLP 工作流与实际能力。",
+    skillsTitle: "核心工具箱",
+    skillsSubtitle: "来自项目、实习和课程的工具、方法与协作能力。",
     langLabel: "语言与框架",
     dataLabel: "NLP 与数据工作",
     strengthsLabel: "能力",
     connectTitle: "期待与您联系",
     connectDesc:
-      "如果您在寻找 NLP、计算语言学或数据科学方向的人才，欢迎通过邮件或 GitHub 与我取得联系。",
+      "如果您关注应用 AI、AI 产品、NLP 系统、RAG 应用或数据驱动的用户研究，欢迎通过邮件或 GitHub 与我联系。",
     email: "发邮件",
     liveDemo: "在线体验",
     edu: [
       {
         school: "英属哥伦比亚大学 (UBC)",
         degree: "数学 学士",
-        year: "2021 – 2025",
+        year: "2021 – 2025 · 已完成",
       },
       {
         school: "英属哥伦比亚大学 (UBC)",
         degree: "数据科学 硕士 · 计算语言学方向",
-        year: "2025 – 2026（在读）",
+        year: "2025 – 2026 · 已完成",
       },
     ],
     projects: [
       {
-        title: "癌症导航聊天机器人 — 语音与短信",
-        period: "MDS 顶点项目 · UBC 精神科实验室 · 2026",
-        tldr: "为无法使用文字界面的 BC 省患者，扩展 RAG 癌症聊天机器人，新增实时语音（STT/TTS）与短信双模态支持。",
+        title: "多通道癌症支持聊天机器人",
+        period: "UBC Psychiatry Lab · MDS 顶点项目 · 2026.04-2026.06",
+        tldr: "完成医疗 RAG 助手的多通道扩展，让患者和照护者可以通过短信、语音、邮件和 REST API 获取癌症支持信息。",
         description:
-          "与 UBC 精神科实验室合作，让现有基于 RAG 的癌症导航聊天机器人突破文字界面限制。整合 AWS Transcribe Medical 实现实时语音识别，实现打断处理和语音通话中的人工接管，并参与短信提示工程和多轮上下文管理。通过 200+ 临床医生验证的问答对进行评估。",
+          "使用 Python/FastAPI、AWS Bedrock 和 RAG 搭建后端，并串联 Lambda、ECS、ALB、SES、S3、DynamoDB、Conversation History 与 Prompt Pipeline。项目覆盖短信压缩与资源链接保留、Transcribe/Polly 语音流、打断处理、邮件线程记忆、共情识别、QA 评估、Stakeholder Demo 和架构/API 文档交付。",
         highlights: [
-          { icon: "🎙️", label: "实时语音 STT/TTS" },
-          { icon: "💬", label: "短信 + 语音双模态" },
-          { icon: "🏥", label: "200+ 经验证问答对" },
+          { icon: "🎙️", label: "短信、语音、邮件" },
+          { icon: "🏥", label: "200+ clinical QA" },
+          { icon: "🏆", label: "Best Cohort Prize" },
         ],
         concepts: [
           { term: "RAG", def: "检索增强生成——先检索相关文档，再生成有依据的回答" },
-          { term: "STT / TTS", def: "语音转文字/文字转语音——医疗版本专为临床术语准确性调优" },
-          { term: "AWS Bedrock", def: "AWS 托管服务，用于在安全云环境中运行基础大语言模型" },
+          { term: "多通道 AI", def: "同一个助手体验适配短信、语音、邮件和 API 输入" },
+          { term: "对话记忆", def: "用历史线程和跟进状态保持医疗支持对话连贯" },
         ],
-        stack: ["Python", "AWS Bedrock", "RAG", "Amazon Transcribe", "Amazon Polly", "LLM"],
+        stack: ["Python", "FastAPI", "AWS Bedrock", "RAG", "Lambda", "ECS", "ALB", "SES", "S3", "DynamoDB", "Transcribe", "Polly"],
         slug: "psychiatry-chatbot",
       },
       {
-        title: "亚马逊评论语料库检索系统",
-        period: "COLX 523 · UBC · 2026",
-        tldr: "基于 50k+ 亚马逊评论的全文检索引擎，支持 NLP 标注浏览与情感感知过滤。",
+        title: "Amazon 评论检索与分析平台",
+        period: "UBC COLX 523 · 2026.02-2026.04",
+        tldr: "面向 Amazon 评论的检索与分析平台，支持关键词检索、情感过滤、属性分面和线上 Demo。",
         description:
-          "构建了一个面向亚马逊户外用品评论的语料探索工具，支持全文检索、标注浏览和情感过滤。体现了我把文本数据组织成可搜索资源、设计 NLP 支撑的交互界面并将大规模评论语料转化为可用研究工具的能力。",
+          "将非结构化商品评论转化为可搜索、可筛选、可解释的数据资产。负责 ETL、文本清洗、属性分面提取、FastAPI REST API、检索排序、分页、部署验证，以及支持用户按关键词、属性和情感探索反馈的界面。",
         highlights: [
           { icon: "📄", label: "50k+ 条评论已索引" },
-          { icon: "🔍", label: "3 种检索模式" },
-          { icon: "🏷️", label: "情感感知过滤" },
+          { icon: "🔍", label: "关键词 + 分面检索" },
+          { icon: "🚀", label: "线上 Demo" },
         ],
         concepts: [
           { term: "语料库", def: "为语言学或 NLP 分析系统整理的文本数据集合" },
-          { term: "Whoosh", def: "纯 Python 实现的全文搜索与索引库" },
+          { term: "属性分面", def: "帮助用户按结构化属性缩小检索结果的筛选方式" },
           { term: "FastAPI", def: "高性能异步 Python Web 框架，适合构建 API 后端" },
         ],
-        stack: ["Python", "FastAPI", "Whoosh", "NLP", "Docker", "语料工具"],
+        stack: ["Python", "FastAPI", "NLTK", "ETL", "HTML/CSS", "JavaScript", "Docker"],
         repo: "https://github.com/yiruiwang091/COLX_523_Projects",
         cta: "看代码",
         slug: "corpus-search",
@@ -366,36 +359,36 @@ const t = {
         demoCta: "在线体验",
       },
       {
-        title: "数学建模",
-        period: "MATH 360 · UBC",
-        tldr: "跨生物、地学、化学和物理四个领域的确定性、随机与数据驱动建模实践。",
+        title: "多模态模型 Membership Inference 风险分析",
+        period: "UBC COLX 585 · 2026.03-2026.04",
+        tldr: "用于衡量多模态模型输出中 membership inference 风险的模型评估流程。",
         description:
-          "针对生物、地学、化学和物理中的实际问题，建立了确定性、随机和数据驱动模型。训练了我把现实问题抽象成可分析数学形式、解释模型结果并进行定量推理的能力。",
+          "基于 PyTorch 和 HuggingFace 搭建可复现实验流程，提取 token loss、likelihood ratio、rank 等信号，对比检测方法，并使用 AUC 与 TPR@FPR=0.1 评估隐私风险。",
         highlights: [
-          { icon: "📐", label: "覆盖 4 个科学领域" },
-          { icon: "🎲", label: "随机模型 + 常微分方程" },
-          { icon: "📊", label: "基于真实数据集" },
+          { icon: "📈", label: "验证集 AUC 0.84" },
+          { icon: "🧪", label: "AUC + TPR@FPR" },
+          { icon: "🔁", label: "可复现实验流程" },
         ],
         concepts: [
-          { term: "随机模型", def: "引入概率随机性，用于模拟不确定性的数学模型" },
-          { term: "ODE", def: "常微分方程——描述系统状态如何随时间连续变化" },
-          { term: "回归分析", def: "量化变量间关系的统计方法" },
+          { term: "Membership inference", def: "判断模型输出是否泄露某条数据曾参与训练的风险分析方法" },
+          { term: "ROC-AUC", def: "衡量模型区分正负样本排序能力的指标" },
+          { term: "Likelihood ratio", def: "比较不同假设下输出可能性的检测信号" },
         ],
-        stack: ["建模", "Python", "回归分析", "科学计算"],
-        repo: "https://github.com/yiruiwang091/MATH-Projects",
+        stack: ["Python", "PyTorch", "HuggingFace", "模型评估", "AUC", "AI 安全"],
+        repo: "https://github.com/yiruiwang091/membership_attack",
         cta: "看代码",
-        slug: "math-modeling",
+        slug: "membership-inference",
       },
       {
-        title: "记账软件",
-        period: "CPSC 210 · UBC",
-        tldr: "基于 JavaFX 的桌面记账应用，采用 MVC 架构，支持分类管理与 JSON 数据持久化。",
+        title: "个人财务记账桌面应用",
+        period: "个人项目 · 2026.04",
+        tldr: "基于 JavaFX 的桌面财务工具，支持多货币录入、分类统计、预算提醒和 JSON 持久化。",
         description:
-          "用 Java 开发了一个个人记账应用，支持收支记录、分类管理和数据持久化。体现了我在面向对象设计、GUI 开发以及把日常需求转化为可用软件方面的实践能力。",
+          "使用 MVC、面向对象设计和事件驱动 UI 实现本地财务管理工具，覆盖多货币录入、汇率标准化、分类支出报告、月度预算跟踪和 JSON 数据持久化。",
         highlights: [
           { icon: "🏗️", label: "MVC 架构" },
-          { icon: "💾", label: "JSON 持久化存储" },
-          { icon: "🖥️", label: "JavaFX 图形界面" },
+          { icon: "💱", label: "多货币流程" },
+          { icon: "💾", label: "JSON 持久化" },
         ],
         concepts: [
           { term: "OOP", def: "面向对象编程——通过可复用类和继承组织软件结构" },
@@ -410,55 +403,43 @@ const t = {
     ] as Project[],
     experiences: [
       {
-        role: "教学实习",
-        org: "海道教育（中国·线上）",
-        period: "2026.04 – 至今",
-        detail: "为新澳大学生提供一对一及小组数学、科学辅导，识别薄弱点并按个人进度调整教学节奏。",
+        role: "Medical AI 软件研发",
+        org: "UBC Psychiatry Lab",
+        period: "2026.04-2026.06",
+        detail: "使用 AWS、RAG 和 FastAPI 为多通道癌症支持机器人搭建后端与 AI 工作流。",
       },
       {
-        role: "学生代表",
-        org: "UBC MDS-CL",
-        period: "",
-        detail: "收集同学意见反馈给教学团队，组织班级社群活动。",
+        role: "数据分析师实习生",
+        org: "金元证券",
+        period: "2025.06-2025.08",
+        detail: "使用 SQL 与 Python 清洗客户交易、持仓和产品申购数据，支持客户画像与数据简报。",
       },
       {
-        role: "数学志愿教师",
-        org: "Norma Rose Point 小学",
-        period: "",
-        detail: "出挑战性数学题，帮小学生建立概念理解并学会清晰表达。",
+        role: "数据分析实习生",
+        org: "烟台蓝天投资控股集团",
+        period: "2024.05-2024.07",
+        detail: "完成 ETL、数据质量检查、批量更新、统计分析和 Tableau/Matplotlib 看板。",
       },
       {
-        role: "中文助教",
-        org: "UBC 亚洲研究系",
-        period: "",
-        detail: "带领口语练习，为中文学习者提供即时反馈与纠正。",
+        role: "大堂经理实习生",
+        org: "烟台农村商业银行",
+        period: "2024.07-2024.09",
+        detail: "协助网点业务分流与服务支持，整理高频咨询和业务办理记录。",
       },
       {
-        role: "英语老师",
-        org: "Qkids（中国·线上）",
-        period: "",
-        detail: "线上教英语，按学生年龄和水平灵活调整课程内容与节奏。",
+        role: "教学与学生代表",
+        org: "UBC MDS-CL · Haidao · UBC Asian Studies",
+        period: "2022-2026",
+        detail: "担任 MDS-CL 学生代表，并在数学、科学、英语和普通话教学中支持不同学习者。",
       },
     ],
-    skills: {
-      languages: ["Python", "R", "Java", "SQL", "FastAPI", "Docker"],
-      data: [
-        "语料检索",
-        "文本分类",
-        "情感分析",
-        "统计建模",
-        "实验评估",
-        "数据可视化",
-      ],
-      strengths: [
-        "搭建语言数据工具",
-        "设计研究原型",
-        "分析多语言文本数据",
-        "把技术想法做成清晰界面",
-        "技术写作与展示",
-        "跨团队协作开发",
-      ],
-    },
+    skills: [
+      { label: "AI & NLP", items: ["LLM", "RAG", "Prompt Engineering", "NLP 流程", "HuggingFace", "PyTorch", "共情识别", "模型评估"] },
+      { label: "Data & Machine Learning", items: ["Python", "pandas", "NumPy", "SQL", "ETL", "统计建模", "时间序列", "AUC/TPR 评估", "Tableau", "Matplotlib"] },
+      { label: "Cloud & Backend", items: ["FastAPI", "REST API", "AWS Bedrock", "Lambda", "ECS", "ALB", "SES", "S3", "DynamoDB", "Transcribe", "Polly"] },
+      { label: "Product, Research & Evaluation", items: ["用户流程", "Stakeholder Demo", "Clinical QA 评估", "技术文档", "客户分层", "数据伦理"] },
+      { label: "Programming & Tools", items: ["Python", "Java", "R", "SQL", "JavaScript", "HTML/CSS", "Git/GitHub", "Jupyter", "R Markdown", "Excel"] },
+    ] as SkillGroup[],
   },
 };
 
@@ -484,68 +465,10 @@ function Reveal({
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
       transition={{ duration: 0.7, delay, ease: [0.25, 0.1, 0.25, 1] }}
       className={className}
-      style={style}
+      style={{ minWidth: 0, ...style }}
     >
       {children}
     </motion.div>
-  );
-}
-
-// ─── section tag ──────────────────────────────────────────────────────────────
-
-function SectionTag({ children }: { children: React.ReactNode }) {
-  return (
-    <span
-      style={{
-        display: "inline-block",
-        fontFamily: C.mono,
-        fontSize: "0.62rem",
-        letterSpacing: "0.22em",
-        color: C.cyan,
-        textTransform: "uppercase",
-        padding: "5px 14px",
-        border: "1px solid rgba(0,212,255,0.3)",
-        borderRadius: "4px",
-        background: "rgba(0,212,255,0.06)",
-        marginBottom: "16px",
-      }}
-    >
-      ⟨ {children} ⟩
-    </span>
-  );
-}
-
-// ─── glow card ────────────────────────────────────────────────────────────────
-
-function GlowCard({
-  children,
-  style = {},
-  glowColor = "cyan",
-}: {
-  children: React.ReactNode;
-  style?: React.CSSProperties;
-  glowColor?: "cyan" | "purple";
-}) {
-  const [hov, setHov] = useState(false);
-  const rgb = glowColor === "purple" ? "168,85,247" : "0,212,255";
-  return (
-    <div
-      onMouseEnter={() => setHov(true)}
-      onMouseLeave={() => setHov(false)}
-      style={{
-        background: hov ? C.cardHover : C.card,
-        border: `1px solid ${hov ? `rgba(${rgb},0.45)` : C.border}`,
-        borderRadius: "20px",
-        backdropFilter: "blur(24px)",
-        transition: "all 0.35s ease",
-        boxShadow: hov
-          ? `0 0 40px rgba(${rgb},0.1), inset 0 1px 0 rgba(255,255,255,0.05)`
-          : "inset 0 1px 0 rgba(255,255,255,0.03)",
-        ...style,
-      }}
-    >
-      {children}
-    </div>
   );
 }
 
@@ -1033,26 +956,21 @@ function SkillsBentoCard({ c }: { c: typeof t.en }) {
         <Code2 size={11} style={{ color: C.green }} />
         {c.skillsTag}
       </div>
-      {/* Languages */}
-      <div style={{ fontFamily: C.mono, fontSize: "0.58rem", letterSpacing: "0.15em", color: C.textDim, marginBottom: "8px" }}>{c.langLabel}</div>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "16px" }}>
-        {c.skills.languages.map((s) => (
-          <span key={s} style={{ padding: "3px 10px", borderRadius: "4px", background: "rgba(0,212,255,0.07)", border: "1px solid rgba(0,212,255,0.2)", color: C.cyan, fontSize: "0.72rem", fontFamily: C.mono }}>{s}</span>
-        ))}
-      </div>
-      {/* NLP */}
-      <div style={{ fontFamily: C.mono, fontSize: "0.58rem", letterSpacing: "0.15em", color: C.textDim, marginBottom: "8px" }}>{c.dataLabel}</div>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "16px" }}>
-        {c.skills.data.map((s) => (
-          <span key={s} style={{ padding: "3px 10px", borderRadius: "4px", background: "rgba(168,85,247,0.07)", border: "1px solid rgba(168,85,247,0.2)", color: C.purple, fontSize: "0.72rem", fontFamily: C.mono }}>{s}</span>
-        ))}
-      </div>
-      {/* Strengths */}
-      <div style={{ fontFamily: C.mono, fontSize: "0.58rem", letterSpacing: "0.15em", color: C.textDim, marginBottom: "8px" }}>{c.strengthsLabel}</div>
-      <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-        {c.skills.strengths.map((s) => (
-          <div key={s} style={{ padding: "6px 10px", borderRadius: "6px", background: "rgba(0,255,136,0.05)", border: "1px solid rgba(0,255,136,0.12)", color: C.textMuted, fontSize: "0.76rem" }}>{s}</div>
-        ))}
+      <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+        {c.skills.map((group, index) => {
+          const accent = index % 2 === 0 ? C.cyan : C.purple;
+          const rgb = index % 2 === 0 ? "0,212,255" : "168,85,247";
+          return (
+            <div key={group.label}>
+              <div style={{ fontFamily: C.mono, fontSize: "0.56rem", letterSpacing: "0.15em", color: C.textDim, marginBottom: "7px" }}>{group.label}</div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+                {group.items.map((s) => (
+                  <span key={s} style={{ padding: "3px 10px", borderRadius: "4px", background: `rgba(${rgb},0.07)`, border: `1px solid rgba(${rgb},0.2)`, color: accent, fontSize: "0.7rem", fontFamily: C.mono }}>{s}</span>
+                ))}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -1061,9 +979,18 @@ function SkillsBentoCard({ c }: { c: typeof t.en }) {
 // ─── main page ────────────────────────────────────────────────────────────────
 
 export default function PortfolioSite() {
-  const [lang, setLang] = useState<Lang>("zh");
+  const [lang, setLang] = useState<Lang>("en");
+  const [isNarrow, setIsNarrow] = useState(false);
   const c = t[lang];
   const toggleLang = () => setLang((p) => (p === "en" ? "zh" : "en"));
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 900px)");
+    const sync = () => setIsNarrow(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
 
   return (
     <div style={{ background: C.bg, color: C.text, minHeight: "100vh" }}>
@@ -1072,6 +999,7 @@ export default function PortfolioSite() {
 
       {/* ══ NAV ══════════════════════════════════════════════════════════════ */}
       <motion.nav
+        className="portfolio-nav"
         initial={{ y: -24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.2 }}
@@ -1084,7 +1012,10 @@ export default function PortfolioSite() {
           padding: "16px 36px",
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
+          justifyContent: isNarrow ? "center" : "space-between",
+          gap: isNarrow ? "8px" : undefined,
+          flexWrap: isNarrow ? "wrap" : undefined,
+          ...(isNarrow ? { padding: "10px 12px" } : {}),
         }}
       >
         {/* logo */}
@@ -1098,6 +1029,10 @@ export default function PortfolioSite() {
             display: "flex",
             alignItems: "center",
             gap: "2px",
+            order: isNarrow ? 3 : undefined,
+            width: isNarrow ? "100%" : undefined,
+            justifyContent: isNarrow ? "center" : undefined,
+            overflowX: isNarrow ? "auto" : undefined,
             background: "rgba(6,10,20,0.8)",
             backdropFilter: "blur(20px)",
             border: `1px solid ${C.border}`,
@@ -1404,18 +1339,21 @@ export default function PortfolioSite() {
             Row 3 — Experience (2 col) | Skills (1 col)
         */}
         <div
+          className="portfolio-bento-grid"
           style={{
             maxWidth: "1280px",
             margin: "0 auto",
             display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gridTemplateAreas: `"p1 p1 edu" "p2 p3 p4" "exp exp sk"`,
+            gridTemplateColumns: isNarrow ? "1fr" : "repeat(3, 1fr)",
+            gridTemplateAreas: isNarrow
+              ? `"p1" "edu" "p2" "p3" "p4" "exp" "sk"`
+              : `"p1 p1 edu" "p2 p3 p4" "exp exp sk"`,
             gap: "14px",
           }}
         >
           {/* ── P1: Featured project ── */}
           <Reveal style={{ gridArea: "p1" }}>
-            <div id="projects" style={{ height: "100%" }}>
+            <div id="projects" style={{ height: "100%", scrollMarginTop: isNarrow ? "112px" : "88px" }}>
               <TerminalCard project={c.projects[0]} index={0} />
             </div>
           </Reveal>
@@ -1442,14 +1380,14 @@ export default function PortfolioSite() {
 
           {/* ── EXPERIENCE: 2-col, bottom left ── */}
           <Reveal delay={0.16} style={{ gridArea: "exp" }}>
-            <div id="experience">
+            <div id="experience" style={{ scrollMarginTop: isNarrow ? "112px" : "88px" }}>
               <ExperienceCard c={c} />
             </div>
           </Reveal>
 
           {/* ── SKILLS: right sidebar, bottom row ── */}
           <Reveal delay={0.19} style={{ gridArea: "sk" }}>
-            <div id="skills" style={{ height: "100%" }}>
+            <div id="skills" style={{ height: "100%", scrollMarginTop: isNarrow ? "112px" : "88px" }}>
               <SkillsBentoCard c={c} />
             </div>
           </Reveal>

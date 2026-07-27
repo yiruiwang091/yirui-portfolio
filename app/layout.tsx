@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Yirui Wang — Computational Linguistics & NLP",
-  description: "Portfolio of Yirui Wang — UBC MDS-CL graduate student specializing in NLP systems, corpus tools, and data science.",
+  title: "Yirui Wang — Applied AI, AI Product & Data Science",
+  description: "Portfolio of Yirui Wang, a UBC MDS-CL graduate focused on applied AI, RAG, NLP systems, data products, and user-centered evaluation.",
 };
 
 export default function RootLayout({
@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="zh-CN"
+      lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">

@@ -11,6 +11,14 @@ function randChar(pool: string[]) {
   return pool[Math.floor(Math.random() * pool.length)];
 }
 
+function seededChar(pool: string[], text: string, index: number) {
+  let hash = 0;
+  for (let i = 0; i < text.length; i++) {
+    hash = (hash * 31 + text.charCodeAt(i) + index) >>> 0;
+  }
+  return pool[hash % pool.length];
+}
+
 interface DecodeTextProps {
   text: string;
   lang: "en" | "zh";
@@ -30,12 +38,13 @@ export default function DecodeText({
   style,
   className,
 }: DecodeTextProps) {
-  const [displayed, setDisplayed] = useState<string[]>([]);
+  const pool = lang === "zh" ? ZH_POOL : EN_POOL;
+  const [displayed, setDisplayed] = useState<string[]>(() =>
+    text.split("").map((ch, i) => (ch === " " || ch === "　" ? ch : seededChar(pool, text, i)))
+  );
   const [started, setStarted] = useState(false);
   const containerRef = useRef<HTMLSpanElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-40px" });
-
-  const pool = lang === "zh" ? ZH_POOL : EN_POOL;
 
   // Start after element enters view + delay
   useEffect(() => {
@@ -46,11 +55,7 @@ export default function DecodeText({
 
   // Scramble → reveal animation
   useEffect(() => {
-    if (!started) {
-      // Show fully scrambled before start
-      setDisplayed(text.split("").map(() => randChar(pool)));
-      return;
-    }
+    if (!started) return;
 
     const chars = text.split("");
     const total = chars.length;
@@ -88,10 +93,16 @@ export default function DecodeText({
   }, [started, text, pool, duration]);
 
   const chars = text.split("");
+  const visibleChars = started
+    ? displayed
+    : chars.map((ch, i) => {
+        if (ch === " " || ch === "　") return ch;
+        return displayed.length === chars.length ? displayed[i] : seededChar(pool, text, i);
+      });
 
   return (
     <span ref={containerRef} style={style} className={className}>
-      {displayed.map((ch, i) => {
+      {visibleChars.map((ch, i) => {
         const isResolved = started
           ? /* We re-derive this from the displayed array — if it matches real char OR was space */ chars[i] === " " || displayed[i] === chars[i]
           : false;
