@@ -979,7 +979,7 @@ function SkillsBentoCard({ c }: { c: typeof t.en }) {
 // ─── main page ────────────────────────────────────────────────────────────────
 
 export default function PortfolioSite() {
-  const [lang, setLang] = useState<Lang>("en");
+  const [lang, setLang] = useState<Lang>("zh");
   const [isNarrow, setIsNarrow] = useState(false);
   const c = t[lang];
   const toggleLang = () => setLang((p) => (p === "en" ? "zh" : "en"));
